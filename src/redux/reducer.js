@@ -1,4 +1,4 @@
-import {auth, getUserData, hangToken, refreshToken, signUp} from "../api";
+import {auth, getUserData, hangToken, refreshToken} from "../api";
 
 const SET_AUTH = 'SET_AUTH'
 const SET_USER_DATA = 'SET_USER_DATA'
@@ -33,28 +33,13 @@ export default reducer
 export const setAuthAC = () => ({type: SET_AUTH})
 const setUserData = (payload) => ({type: SET_USER_DATA, payload})
 
-export const signUpThunk = (data) => {
-    return async (dispatch) => {
-        try {
-            hangToken()
-            let response = await signUp(data)
-            if (response.status === 201) {
-                alert('Вы успешно зарегистрировались')
-                window.location = '/login'
-            }
-        } catch (e) {
-            alert(e)
-        }
-    }
-}
-
 export const loginThunk = (data) => {
     return async (dispatch) => {
         try {
             hangToken()
             let response = await auth(data)
             if (response.status === 200) {
-                dispatch(setAuthAC(response.data))
+                dispatch(setAuthAC())
                 localStorage.setItem('access', response.data.access)
                 localStorage.setItem('client_id', response.data.client_id)
                 localStorage.setItem('refresh', response.data.refresh)

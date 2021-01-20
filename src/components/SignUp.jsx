@@ -1,11 +1,8 @@
 import React from 'react';
 import {Formik, Form, Field} from 'formik'
-import {signUpThunk} from "../redux/reducer";
-import {useDispatch} from "react-redux";
+import {signUp} from "../api";
 
 const SignUp = () => {
-
-    const dispatch = useDispatch()
 
     const validate = (values) => {
         const errors = {};
@@ -35,7 +32,7 @@ const SignUp = () => {
                     email: '', password: '', invited_by: 'RU-637164',
                     name: '', surname: '', country_key: 'RU'
                 }}
-                onSubmit={(values) => dispatch(signUpThunk(values))}
+                onSubmit={(values) => signUp()}
                 validate={validate}>
                 {({errors}) => (
                     <Form className={'form'}>

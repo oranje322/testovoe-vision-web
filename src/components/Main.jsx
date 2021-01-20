@@ -7,8 +7,6 @@ const Main = () => {
     const dispatch = useDispatch()
     const userData = useSelector(state => state.userData)
 
-    console.log(userData)
-
     useEffect(() => {
         dispatch(getUserDataThunk())
     }, [])

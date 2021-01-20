@@ -15,17 +15,26 @@ export const hangToken = () => {
 }
 
 export const signUp = async (data) => {
-    return await axios.post('http://erp.apptrix.ru/api/clients/create/', {
-        user: {
-            email: data.email,
-            password: data.password
-        },
-        phone: '',
-        invited_by: data.invited_by,
-        name: data.name,
-        surname: data.surname,
-        country_key: data.country_key
-    })
+    try {
+        let response = await axios.post('http://erp.apptrix.ru/api/clients/create/', {
+            user: {
+                email: data.email,
+                password: data.password
+            },
+            phone: '',
+            invited_by: data.invited_by,
+            name: data.name,
+            surname: data.surname,
+            country_key: data.country_key
+        })
+
+        if (response.status === 201) {
+            alert('Вы успешно зарегистрировались')
+            window.location = '/login'
+        }
+    } catch (e) {
+        alert(e)
+    }
 }
 
 export const auth = async (data) => {
