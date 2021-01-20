@@ -9,7 +9,7 @@
     margin: 10% auto;
 }
 
-.signUp {
+.signUp,.login,.main {
     min-height: 20px;
     margin: 6px;
     padding: 19px;
@@ -19,6 +19,8 @@
     display: flex;
     flex-direction: column;
 }
+
+
 
 .form {
     display: flex;
@@ -58,4 +60,8 @@
 .error {
     color: red;
     align-self: flex-end;
+}
+
+.img {
+    width: 150px;
 }

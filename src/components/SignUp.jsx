@@ -1,11 +1,14 @@
 import React from 'react';
 import {Formik, Form, Field} from 'formik'
+import {signUpThunk} from "../redux/reducer";
+import {useDispatch} from "react-redux";
 
 const SignUp = () => {
 
+    const dispatch = useDispatch()
+
     const validate = (values) => {
         const errors = {};
-        console.log(values)
         if (!values.email) {
             errors.email = 'Введите email';
         } else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(values.email)) {
@@ -32,7 +35,7 @@ const SignUp = () => {
                         email: '', password: '', invited_by: 'RU-637164',
                         name: '', surname: '', country_key: 'RU'
                     }}
-                    onSubmit={(values) => alert(JSON.stringify(values))}
+                    onSubmit={(values) => dispatch(signUpThunk(values))}
                     validate={validate}>
                     {({ errors }) => (
                         <Form className={'form'}>
@@ -66,41 +69,9 @@ const SignUp = () => {
                                 <Field disabled className={'form-input'} id={'country_key'} name={'country_key'}/>
                             </div>
                             <button className={'btn'} type={'submit'}>Зарегистрироваться</button>
-
-
                         </Form>
                     )}
-
                 </Formik>
-
-
-                {/*<form className={'form'}>*/}
-                {/*    <p className="form-title">Регистрация</p>*/}
-                {/*    <div className={'form-el'}>*/}
-                {/*        <p className="form-text">Адрес электронной почты</p>*/}
-                {/*        <input type="text" className="form-input"/>*/}
-                {/*    </div>*/}
-                {/*    <div className={'form-el'}>*/}
-                {/*        <p className="form-text">Пароль</p>*/}
-                {/*        <input type="text" className="form-input"/>*/}
-                {/*    </div>*/}
-                {/*    <div className={'form-el'}>*/}
-                {/*        <p className="form-text">Invited by</p>*/}
-                {/*        <input type="text" className="form-input"/>*/}
-                {/*    </div>*/}
-                {/*    <div className={'form-el'}>*/}
-                {/*        <p className="form-text">Ваше имя</p>*/}
-                {/*        <input type="text" className="form-input"/>*/}
-                {/*    </div>*/}
-                {/*    <div className={'form-el'}>*/}
-                {/*        <p className="form-text">Ваша фамилия</p>*/}
-                {/*        <input type="text" className="form-input"/>*/}
-                {/*    </div>*/}
-                {/*    <div className={'form-el'}>*/}
-                {/*        <p className="form-text">Ключ страны</p>*/}
-                {/*        <input type="text" className="form-input"/>*/}
-                {/*    </div>*/}
-                {/*</form>*/}
             </div>
         );
     };
