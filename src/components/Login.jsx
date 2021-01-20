@@ -1,13 +1,11 @@
 import React from 'react';
 import {Field, Form, Formik} from "formik";
 import {loginThunk} from "../redux/reducer";
-import {useDispatch, useSelector} from "react-redux";
+import {useDispatch} from "react-redux";
 
 const Login = () => {
 
     const dispatch = useDispatch()
-
-
 
     const validate = (values) => {
         const errors = {};
@@ -30,7 +28,7 @@ const Login = () => {
                 }}
                 onSubmit={(values) => dispatch(loginThunk(values))}
                 validate={validate}>
-                {({ errors }) => (
+                {({errors}) => (
                     <Form className={'form'}>
                         <h1 className="form-title">Логин</h1>
                         <div className="form-el">
@@ -47,8 +45,6 @@ const Login = () => {
                     </Form>
                 )}
             </Formik>
-
-
         </div>
     );
 };

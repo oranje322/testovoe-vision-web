@@ -9,9 +9,9 @@ const Main = () => {
 
     console.log(userData)
 
-    useEffect(()=> {
+    useEffect(() => {
         dispatch(getUserDataThunk())
-    },[])
+    }, [])
 
     return (
         <div className={'main'}>

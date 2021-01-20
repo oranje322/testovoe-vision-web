@@ -1,6 +1,5 @@
 import axios from "axios";
 
-
 export const hangToken = () => {
     if (localStorage.hasOwnProperty('access')) {
         axios.interceptors.request.use(
@@ -14,8 +13,6 @@ export const hangToken = () => {
         )
     }
 }
-
-
 
 export const signUp = async (data) => {
     return await axios.post('http://erp.apptrix.ru/api/clients/create/', {

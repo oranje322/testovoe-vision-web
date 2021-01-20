@@ -8,7 +8,6 @@ const initialState = {
     userData: {}
 }
 
-
 const reducer = (state = initialState, action) => {
     switch (action.type) {
         case SET_AUTH: {
@@ -23,7 +22,6 @@ const reducer = (state = initialState, action) => {
                 userData: action.payload
             }
         }
-
         default:
             return state
     }
@@ -32,7 +30,7 @@ const reducer = (state = initialState, action) => {
 export default reducer
 
 
-const setAuthAC = (payload) => ({type: SET_AUTH, payload})
+export const setAuthAC = () => ({type: SET_AUTH})
 const setUserData = (payload) => ({type: SET_USER_DATA, payload})
 
 export const signUpThunk = (data) => {
@@ -40,8 +38,6 @@ export const signUpThunk = (data) => {
         try {
             hangToken()
             let response = await signUp(data)
-
-            console.log(response)
             if (response.status === 201) {
                 alert('Вы успешно зарегистрировались')
                 window.location = '/login'
@@ -57,8 +53,6 @@ export const loginThunk = (data) => {
         try {
             hangToken()
             let response = await auth(data)
-
-
             if (response.status === 200) {
                 dispatch(setAuthAC(response.data))
                 localStorage.setItem('access', response.data.access)
@@ -66,12 +60,6 @@ export const loginThunk = (data) => {
                 localStorage.setItem('refresh', response.data.refresh)
                 localStorage.setItem('username', response.data.username)
             }
-
-            if (response.status === 401) {
-                debugger
-                console.log('hello')
-            }
-
         } catch (error) {
             if (error.response.status === 401 && localStorage.refresh) {
                 await refreshToken(localStorage.getItem('refresh'))
@@ -80,15 +68,10 @@ export const loginThunk = (data) => {
                     })
                     .catch(error => {
                         localStorage.clear()
-                        // window.location = '/login'
+                        window.location = '/login'
                     })
             }
         }
-        //
-        // console.log(error.response);
-        // console.log(error.response.data);
-        // console.log(error.response.status);
-        // console.log(error.response.headers)
     }
 }
 
